@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../layout/custom_preview.xml" value="0.1828125" />
+        <entry key="app/src/main/res/drawable/ic_home.xml" value="0.18072916666666666" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.16458333333333333" />
+        <entry key="app/src/main/res/layout/activity_topic_board.xml" value="0.18659420289855072" />
+        <entry key="app/src/main/res/layout/fragment_communities.xml" value="0.18659420289855072" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.16458333333333333" />
+        <entry key="app/src/main/res/layout/list_communities.xml" value="0.18659420289855072" />
+        <entry key="app/src/main/res/layout/list_item.xml" value="0.18659420289855072" />
+        <entry key="app/src/main/res/layout/twitter_webview.xml" value="0.16458333333333333" />
+        <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.21822916666666667" />
+        <entry key="app/src/main/res/menu/comminity_top_menu.xml" value="0.21822916666666667" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
