@@ -54,21 +54,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalRule" />
 
-    <TextView
-        android:id="@+id/textView2"
+    <LinearLayout
+        android:id="@+id/container"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:onClick="visitHumber"
-        android:text="@string/visit_humber"
-        android:textColor="@color/teal_700"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="40dp"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.017" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/twitterBtn"
+            android:src="@drawable/twitter_icon"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:onClick="openTwitterWebActivity"/>
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/humberWebsiteBtn"
+            android:src="@drawable/humber_logo"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/twitterBtn"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:onClick="visitHumber"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

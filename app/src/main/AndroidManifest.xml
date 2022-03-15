@@ -30,6 +30,9 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
+            android:name=".TwitterActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
