@@ -5,27 +5,25 @@ import static android.os.Environment.DIRECTORY_DOWNLOADS;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
 import android.Manifest;
-import android.app.DownloadManager;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.projectmeethumberv1.utils.FirebaseUtils;
 import com.example.projectmeethumberv1.utils.UriUtils;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,6 +41,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 public class TopicBoardActivity extends AppCompatActivity {
 
@@ -67,7 +66,9 @@ public class TopicBoardActivity extends AppCompatActivity {
     private Group communityAttributes;
     private ListView listView;
     private ArrayList<String> fileNames;
+    private ArrayList<String> fileNamesCopyForSearch;
     private HashMap<String, Object> files;
+    private ArrayList<String> foundFiles;
     private ArrayAdapter<String> adapter;
     private FirebaseUtils firebaseUtils;
 
@@ -96,7 +97,6 @@ public class TopicBoardActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot mainSnapshot) {
                 firebaseUtils.loadGroupFiles(mainSnapshot, fileNames, files, textView.getText().toString());
                 adapter.notifyDataSetChanged();
-
             }
 
             @Override
@@ -222,4 +222,47 @@ public class TopicBoardActivity extends AppCompatActivity {
         };
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.comminity_top_menu, menu);
+        MenuItem item = menu.findItem(R.id.action_document_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public boolean onQueryTextSubmit(String search) {
+                searchDocument(search);
+                // To avoid calling onQueryTextSubmit twice
+                searchView.setIconified(true);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        searchView.setOnCloseListener(() -> {
+            foundFiles.clear();
+            adapter.clear();
+            adapter.addAll(fileNamesCopyForSearch);
+            return false;
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void searchDocument(String search) {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Searching...");
+        progressDialog.show();
+        foundFiles = files.keySet().stream()
+                .filter(o -> o.equalsIgnoreCase(search))
+                .collect(Collectors.toCollection(ArrayList::new));
+        progressDialog.cancel();
+        fileNamesCopyForSearch = new ArrayList<>(fileNames);
+        adapter.clear();
+        adapter.addAll(foundFiles);
+    }
 }
