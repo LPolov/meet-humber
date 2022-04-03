@@ -1,14 +1,21 @@
 package com.example.projectmeethumberv1;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -31,7 +38,7 @@ public class CommunitiesFragment extends Fragment {
     private static final String GROUPS_ENTRY_NAME = "groups";
     private static final String GROUP_NOT_FOUND_MESSAGE = "Selected group not found";
 
-    private FirebaseListAdapter<Group> adapter;
+    private FirebaseListAdapter<Group> adapter, newAdapter;
     private ListView listOfGroups;
     private DatabaseReference databaseReference;
     private ArrayList<HashMap<String, Object>> communities;
@@ -45,9 +52,57 @@ public class CommunitiesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent,
                              Bundle savedInstanceState) {
+
+        setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_communities, parent, false);
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.chat_top_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+        MenuItem item = menu.findItem(R.id.action_chat_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public boolean onQueryTextSubmit(String search) {
+                return false;
+            }
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchCommunity(newText);
+                return false;
+            }
+        });
+
+        searchView.setOnCloseListener(() -> {
+            displayAllGroups();
+            return false;
+        });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void searchCommunity(String search) {
+        Query query = FirebaseDatabase.getInstance().getReference("groups").orderByChild("name").equalTo(search);
+        FirebaseListOptions<Group> options = new FirebaseListOptions.Builder<Group>()
+                .setLayout(R.layout.group_item)
+                .setQuery(query, Group.class)
+                .setLifecycleOwner(this)
+                .build();
+
+        newAdapter = new FirebaseListAdapter<Group>(options) {
+            @Override
+            protected void populateView(View v, Group model, int position) {
+                TextView gr_name;
+                gr_name = (TextView) v.findViewById(R.id.group_name);
+                gr_name.setText(model.getName());
+            }
+        };
+        listOfGroups.setAdapter(newAdapter);
     }
 
     @Override
