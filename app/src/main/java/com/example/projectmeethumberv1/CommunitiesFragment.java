@@ -1,6 +1,8 @@
 package com.example.projectmeethumberv1;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -10,6 +12,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,16 +22,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.type.LatLng;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -43,6 +51,7 @@ public class CommunitiesFragment extends Fragment {
     private DatabaseReference databaseReference;
     private ArrayList<HashMap<String, Object>> communities;
     private ArrayList<String> communityNames;
+    private Button btnAddCommunity;
 //    private ArrayAdapter<String> adapter;
 
     public CommunitiesFragment() {
@@ -74,6 +83,10 @@ public class CommunitiesFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public boolean onQueryTextChange(String newText) {
+                if(newText.isEmpty()){
+                    displayAllGroups();
+                    return false;
+                }
                 searchCommunity(newText);
                 return false;
             }
@@ -83,6 +96,7 @@ public class CommunitiesFragment extends Fragment {
             displayAllGroups();
             return false;
         });
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -121,6 +135,19 @@ public class CommunitiesFragment extends Fragment {
             }
         });
         displayAllGroups();
+
+        btnAddCommunity = view.findViewById(R.id.btnAddCommunity);
+
+        btnAddCommunity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                AddCommunityFragment addCommunityFragment = new AddCommunityFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragmentContainerView, addCommunityFragment); // give your fragment container id in first parameter
+                transaction.addToBackStack(null);  // if written, this transaction will be added to backstack
+                transaction.commit();
+            }
+        });
     }
 
 

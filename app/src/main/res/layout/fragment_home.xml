@@ -64,6 +64,18 @@
         app:layout_constraintRight_toRightOf="parent">
 
         <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:id="@+id/mapsBtn"
+            android:src="@drawable/map"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:onClick="openMapsActivity"/>
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/twitterBtn"

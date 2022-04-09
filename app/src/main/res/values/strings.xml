@@ -8,4 +8,5 @@
     <string name="email"><u>Email</u></string>
     <string name="intro_text">Welcome to MeetHumber where you can collaborate with other Humber students.\n\nYou can meet others in <i>Chat</i> section and share documents under <i>Communities</i> Section.\nHave fun!</string>
     <string name="visit_humber"><u>Visit Humber College Website</u></string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

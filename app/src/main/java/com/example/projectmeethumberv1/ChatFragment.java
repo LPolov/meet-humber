@@ -63,16 +63,22 @@ public class ChatFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public boolean onQueryTextChange(String newText) {
+                if(newText.isEmpty()){
+                    displayAllGroups();
+                    return false;
+                }
                 searchCommunity(newText);
                 return false;
             }
         });
+
 
         searchView.setOnCloseListener(() -> {
             displayAllGroups();
             return false;
         });
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void searchCommunity(String search) {

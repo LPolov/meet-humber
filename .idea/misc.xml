@@ -4,6 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../layout/custom_preview.xml" value="0.1828125" />
+        <entry key="..\:/Humber/Winter2022/Android App Development 2 - ITE-5433-RNA/meet-humber/app/src/main/res/drawable/maps_icon.xml" value="0.328125" />
+        <entry key="..\:/Humber/Winter2022/Android App Development 2 - ITE-5433-RNA/meet-humber/app/src/main/res/layout/activity_main.xml" value="0.2921875" />
+        <entry key="..\:/Humber/Winter2022/Android App Development 2 - ITE-5433-RNA/meet-humber/app/src/main/res/layout/activity_messaging.xml" value="0.36666666666666664" />
+        <entry key="..\:/Humber/Winter2022/Android App Development 2 - ITE-5433-RNA/meet-humber/app/src/main/res/layout/fragment_add_community.xml" value="0.36666666666666664" />
+        <entry key="..\:/Humber/Winter2022/Android App Development 2 - ITE-5433-RNA/meet-humber/app/src/main/res/layout/fragment_chat.xml" value="0.36666666666666664" />
+        <entry key="..\:/Humber/Winter2022/Android App Development 2 - ITE-5433-RNA/meet-humber/app/src/main/res/layout/fragment_communities.xml" value="0.2786885245901639" />
+        <entry key="..\:/Humber/Winter2022/Android App Development 2 - ITE-5433-RNA/meet-humber/app/src/main/res/layout/fragment_home.xml" value="0.31197916666666664" />
+        <entry key="..\:/Humber/Winter2022/Android App Development 2 - ITE-5433-RNA/meet-humber/app/src/main/res/layout/list_communities.xml" value="0.36666666666666664" />
+        <entry key="..\:/Humber/Winter2022/Android App Development 2 - ITE-5433-RNA/meet-humber/app/src/main/res/layout/list_item.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Nurlybek/Documents/Winter2022/Android/Projects/meet-humber/meet-humber/app/src/main/res/menu/chat_top_menu.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.18072916666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16458333333333333" />

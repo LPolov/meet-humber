@@ -37,4 +37,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, TwitterActivity.class);
         startActivity(intent);
     }
+
+    public void openMapsActivity(View v) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
+
+
 }
